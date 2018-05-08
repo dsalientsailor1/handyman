@@ -1,0 +1,121 @@
+
+<!-- <ion-header>
+<ion-navbar color="fourth">
+</ion-navbar>
+</ion-header> -->
+<ion-content class="head">
+    <div class="search-container">
+        <ion-toolbar color="light"  class="search-toolbar">
+            <ion-buttons start>
+                <button  ion-button icon-only class="geolocation-button" >
+                  <ion-icon color="third" name="locate"></ion-icon>
+                </button>
+              </ion-buttons>
+          <ion-searchbar [(ngModel)]="autocomplete.input" (ionInput)="searchResult($event)" class="search-places-bar" placeholder="Filter HandyMen by Location"></ion-searchbar>
+        </ion-toolbar>
+        <ion-list [hidden]="this.autocomplete.input.length == 0" style="height:25%" *ngIf="result === true" class="search-options-list">
+          <ion-item *ngFor="let item of list" tappable (click)="selectSearchResult(item.id)">
+            {{ item.name }}
+          </ion-item>
+        </ion-list>
+        <div *ngIf="result === false">
+      </div>
+    </div>
+    <!-- <div>
+        <ion-segment [(ngModel)]="loc">
+          <ion-segment-button block value="filter_search" style="color:#6b6b6b; font-size: 5px">
+          <ion-icon style="font-size: 17px">Filter Search</ion-icon>
+          </ion-segment-button>
+        </ion-segment>
+      </div>
+      <div [ngSwitch]="loc">
+          <div  *ngSwitchCase="'filter_search'">
+              <div class="search-container">
+                  <ion-toolbar color="light"  class="search-toolbar">
+                    <ion-searchbar [(ngModel)]="autocomplete.input" (ionInput)="searchResult($event)" class="search-places-bar" placeholder="Filter HandyMen by Location"></ion-searchbar>
+                  </ion-toolbar>
+                  <ion-list style="height:25%" *ngIf="result === true" class="search-options-list">
+                    <ion-item *ngFor="let item of list" tappable (click)="selectSearchResult(item.id)">
+                      {{ item.name }}
+                    </ion-item>
+                  </ion-list>
+              </div>
+              <p style="text-align:center">OR</p>
+          <ion-row>
+            <ion-col col-2></ion-col>
+            <ion-col col-8>
+            <button (click)="useLocator()" ion-button>
+              use your current location
+              </button>
+            </ion-col>
+            <ion-col col-2></ion-col>
+          </ion-row>
+          </div>
+      </div>
+    <div> -->
+      <div>
+        <ion-segment [(ngModel)]="pet">
+          <ion-segment-button value="company_result" style="color:#6b6b6b; font-size: 5px">
+          <ion-icon style="font-size: 17px">Companies</ion-icon>
+          </ion-segment-button>
+          <ion-segment-button value="individual_result" style="color:#6b6b6b">
+          <ion-icon style="font-size: 17px">Individuals</ion-icon>
+          </ion-segment-button>
+          <ion-segment-button  value="map_view" style="color:#6b6b6b">
+            <ion-icon (click)="showMap()" style="font-size: 17px">Map</ion-icon>
+            </ion-segment-button>
+        </ion-segment>
+      </div>
+
+      <div [ngSwitch]="pet">
+          <div  *ngSwitchCase="'company_result'">
+              <div *ngIf= "showcomp">
+                  <ion-list>
+                      <ion-item class="item-remove-animate item-avatar item-icon-right list-grow-animation" (click)="goTo(company.company_id)" no-lines style="background:#a9a7a60b; margin-top:5px;" *ngFor="let company of company_handymen">
+                        <ion-thumbnail   item-start>
+                            <img id="profile-image" *ngIf="company.pic_set == 1"  src={{this.globals.baseUrl}}{{company.thumb}}>
+                            <img id="profile-image" *ngIf="company.pic_set == !1" src="./assets/imgs/fhm.jpg">
+                        </ion-thumbnail>
+                        <div style="padding-top:-8px" >
+                        <h2 style="color: black; font-family:Lucida Sans Regular; font-size: 1.30em;">{{company.name}}</h2>
+                        <p style="color:#a9a7a6; font-family:Lucida Sans Regular;">{{company.state}}&bull;{{company.city}}</p>
+                        </div>
+                        <rating  max="5">  </rating>
+                      </ion-item>
+                  </ion-list>
+                    </div>
+                    <div *ngIf="showcomp === false">
+                        <preload-image [ratio]="{w:1, h:1}" src="./assets/imgs/nohandy.jpg"></preload-image>
+                    </div>
+          </div>
+
+          <div  *ngSwitchCase="'individual_result'">
+            <div *ngIf="showindv">
+              <ion-list>
+              <ion-item class="item-remove-animate item-avatar item-icon-right list-grow-animation"  (click)="goToProfile(individual.id)" no-lines style="background:#a9a7a60b; margin-top:5px;" *ngFor="let individual of individual_handymen">
+                <ion-thumbnail  item-start>
+                  <img id="profile-image" *ngIf="individual.pic_set == 1"  src={{this.globals.baseUrl}}{{individual.thumb}}>
+                  <img id="profile-image" *ngIf="individual.pic_set == !1" src="./assets/imgs/fhm.jpg">
+                </ion-thumbnail>
+                <div style="padding-top:-8px" >
+                <h2 style="color: black; font-family:Lucida Sans Regular; font-size: 1.30em; font-weight: lighter">{{individual.first_name}} {{individual.last_name}}</h2>
+                <p style="color:#a9a7a6; font-family:Lucida Sans Regular;">{{individual.state}}&bull;{{individual.city}}</p>
+                <rating  max="5">  </rating>
+                </div>
+               
+              </ion-item>
+          </ion-list>
+        </div>
+          <div *ngIf="showindv === false">
+              <preload-image [ratio]="{w:1, h:1}" src="./assets/imgs/nohandy.jpg"></preload-image>
+          </div>
+          </div>
+          <div   *ngSwitchCase="'map_view'">
+              <button ion-button (click)="run()" small color="purple" >Request</button>
+          </div>
+          </div>
+
+          uyjuyjuyjyujyujuyjuj
+            <div *ngIf="showMapStatus" #map id='map'></div>
+</ion-content>
+

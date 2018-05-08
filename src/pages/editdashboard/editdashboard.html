@@ -1,0 +1,55 @@
+<ion-header>
+    <ion-navbar color="third">
+      <ion-title>Settings</ion-title>
+      <ion-buttons (click)="confirms()" end>
+        <button ion-button>
+          Save
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content class="settings-content">
+    <div class="user-image-content">
+      <ion-row no-padding class="user-image-row">
+        <ion-col no-padding width-40>
+          <preload-image class="user-image" [ratio]="{w:1, h:1}" src="profile.user.image" alt="aca va la img" title="IMAGE!"></preload-image>
+        </ion-col>
+      </ion-row>
+      <h3 class="image-action">Change profile picture</h3>
+    </div>
+  
+    
+        <form [formGroup]="dashboardedit" class="settings-form" (ngSubmit)="logForm()">
+
+      <ion-list class="user-data-content">
+        <ion-item>
+          <ion-label stacked>Company Name</ion-label>
+          <ion-input formControlName="company_name" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Company Phone Number</ion-label>
+          <ion-input formControlName="company_phone" type="number"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>Company Address</ion-label>
+            <ion-input formControlName="company_address" type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+              <ion-label stacked>Company Website</ion-label>
+              <ion-input formControlName="company_website" type="number"></ion-input>
+            </ion-item>
+      </ion-list>
+
+      <button [hidden]="saving == false" ion-button block  type="submit" color="third" class="login-button">I am Sure</button>
+    </form>
+      </ion-content>
+      <ion-footer>
+    <ion-navbar color="third">
+      <ion-buttons end>
+        <button (click)="close()" ion-button>
+          Close
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-footer>

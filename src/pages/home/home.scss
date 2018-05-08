@@ -1,3 +1,48 @@
 page-home {
+  .background {
+          background: url(../assets/imgs/sat.jpg)!important;
+         
+          background-size: cover !important;
+          background-repeat: no-repeat !important;
+          background-position: center center;
+          
+      }
 
+  .head{
+    background-color: white;
+  }
+  .htext{
+    font-family: Lucida Sans Regular;
+    font-size: 1.95em;
+    font-weight: 640;
+    padding: 0.25em 0.75em;
+    margin-bottom: -5px
+  }
+  .diss {
+    margin-left: 0px;
+    // margin-right: 25px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0px;
+    text-align: center;
+    position: relative;
+    
+  }
+  .para{
+    font-family: Lucida Sans Regular;
+    font-size: 1.0em;
+    text-align: center;
+  }
 }
+
+.main-features {
+  color: #ffffff;
+
+  ion-icon {
+      font-size: 2.5rem !important;
+  }
+
+ 
+}
+

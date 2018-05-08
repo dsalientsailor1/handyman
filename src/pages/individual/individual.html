@@ -1,0 +1,109 @@
+<!--
+  Generated template for the IndividualPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header no-border>
+
+  <ion-navbar color="third">
+    <ion-title style="text-align:center">Individual Registration</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-segment color="primary"  [(ngModel)]="form" >
+        <ion-segment-button value="personal" >
+          Personal
+        </ion-segment-button>
+        <ion-segment-button value="profession" >
+          Profession
+        </ion-segment-button>
+      </ion-segment>
+      <div [ngSwitch]="form">
+          <div *ngSwitchCase="'personal'">   
+  <form [formGroup]="individual" (ngSubmit)="logFormOne()">
+      
+      
+      <ion-item no-lines style="width:100%">
+        <ion-label color="primary" style="font-family: Lucida sans">Country</ion-label>
+        <ion-select formControlName="country">
+          <ion-option *ngFor="let country of countries" value="{{country.id}}">{{country.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      
+      <ion-item no-lines style="width:100%">
+        <ion-label color="primary" style="font-family: Lucida sans">State</ion-label>
+        <ion-select formControlName="state">
+          <ion-option *ngFor="let state of states" value="{{state.id}}">{{state.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item no-lines style="width:100%">
+          <ion-label color="primary" style="font-family: Lucida sans">City</ion-label>
+          <ion-select formControlName="city">
+            <ion-option *ngFor="let city of cities" value="{{city.id}}">{{city.name}}</ion-option>
+          </ion-select>
+        </ion-item>
+
+      <ion-item no-lines>
+          <ion-label style="font-family: Lucida sans" color="primary" floating>Enter Name</ion-label>
+        <ion-input type="text" style=" border-bottom:3px solid #488aff" formControlName="name"></ion-input>
+      </ion-item>
+
+      <ion-item no-lines>
+          <ion-label style="font-family: Lucida sans" color="primary" floating>Enter Phone Number</ion-label>
+        <ion-input type="tel" style=" border-bottom:3px solid #488aff" formControlName="phone"></ion-input>
+      </ion-item>
+
+      <ion-item no-lines>
+        <ion-label style="font-family: Lucida sans" color="primary" floating>Enter Address</ion-label>
+        <ion-input type="text" style=" border-bottom:3px solid #488aff" formControlName="address"></ion-input>
+      </ion-item>
+              <ion-item no-lines>
+                  <ion-label style="font-family: Lucida sans" color="primary" floating>Enter Website</ion-label>
+                  <ion-input type="url" style=" border-bottom:3px solid #488aff" formControlName="website"></ion-input>
+                </ion-item>
+
+                <ion-item no-lines>
+                    <ion-label style="font-family: Lucida sans" color="primary" floating>Enter Years of Experience</ion-label>
+                    <ion-input no-lines style=" border-bottom:3px solid #488aff" type="number" formControlName="years"></ion-input>
+                  </ion-item>
+
+                  <ion-item >
+                      <ion-input accept="image/*" (change)="upload($event)" placeholder="select picture" id="photo" type="file"></ion-input>                    
+                    </ion-item>
+
+          <button clear ion-button type="submit" color="primary">submit</button>
+          </form>
+          </div>
+          <div *ngSwitchCase="'profession'">
+              <form [formGroup]="individual_setup" (ngSubmit)="logFormTwo()">
+          <ion-item no-lines style="width:100%">
+              <ion-label color="primary" style="font-family: Lucida sans">Category Type</ion-label>
+              <ion-select (ionChange)="categoryValue()" formControlName="category">
+                <ion-option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</ion-option>
+                
+              </ion-select>
+            </ion-item>
+          
+            <ion-item no-lines style="width:100%">
+              <ion-label color="primary" style="font-family: Lucida sans">Services Type</ion-label>
+              <ion-select  formControlName="service">
+                <ion-option *ngFor="let service of services" value="{{service.id}}">{{service.name}}</ion-option>
+              </ion-select>
+            </ion-item>
+
+           
+
+            <ion-item >
+                <ion-label style="font-family: Lucida sans" color="third" stacked>Enter A Description</ion-label>
+                <ion-textarea no-lines style="border: solid 1px #488aff" formControlName="description" ></ion-textarea>
+              </ion-item>
+              <button clear ion-button type="submit" color="third">submit</button>
+      </form>
+  </div>
+          </div>
+</ion-content>

@@ -1,0 +1,114 @@
+<ion-header>
+    <ion-navbar color="primary">
+      <ion-title>Edit Profile</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content padding class="settings-content">
+
+      <div *ngIf="!show" align="center" style="background:none !important">
+          <img src="./assets/imgs/loadgif.gif"/>
+        </div>
+
+    <div *ngIf="show" class="user-image-content">
+      <ion-row no-padding class="user-image-row">
+        <ion-col no-padding width-40>
+          <preload-image class="user-image" [ratio]="{w:1, h:1}" src={{this.globals.baseUrl}}{{this.current.profile_picture}} ></preload-image>
+        </ion-col>
+      </ion-row>
+      <!-- <h3 class="image-action">Change profile picture</h3> -->
+    </div>
+  
+    <ion-segment color="primary"  [(ngModel)]="form" >
+      <ion-segment-button value="personal" >
+        Personal
+      </ion-segment-button>
+      <ion-segment-button value="contact" >
+        Contact
+      </ion-segment-button>
+    </ion-segment>
+    
+    <div [ngSwitch]="form">
+      <div *ngSwitchCase="'personal'">
+        <form [formGroup]="profileedit" class="settings-form" (ngSubmit)="logForm()">
+      <ion-list class="user-data-content">
+        <ion-item no-lines>
+          <ion-label color="primary" style="font-family: Lucida sans" floating>First Name</ion-label>
+          <ion-input style=" border-bottom:3px solid #488aff" formControlName="first_name" type="text"></ion-input>
+        </ion-item>
+        <ion-item no-lines>
+          <ion-label color="primary" style="font-family: Lucida sans" floating>Last Name</ion-label>
+          <ion-input style=" border-bottom:3px solid #488aff" formControlName="last_name" type="text"></ion-input>
+        </ion-item>
+          <ion-item no-lines>
+              <ion-label color="primary" style="font-family: Lucida sans" floating>Phone</ion-label>
+              <ion-input style=" border-bottom:3px solid #488aff" formControlName="phone1" type="tel"></ion-input>
+            </ion-item>
+            <ion-item no-lines>
+              <ion-label color="primary" style="font-family: Lucida sans" floating>Phone2</ion-label>
+              <ion-input style=" border-bottom:3px solid #488aff" formControlName="phone2" type="tel"></ion-input>
+            </ion-item>
+            <ion-item >
+              <ion-input accept="image/*" (change)="upload($event)" placeholder="select picture" id="photo" type="file"></ion-input>                    
+            </ion-item>
+            <ion-item no-lines style="width:100%">
+                <ion-label color="primary" style="font-family: Lucida sans">Nationality</ion-label>
+                <ion-select (ionChange)="countryValue()" formControlName="nationality">
+                  <ion-option *ngFor="let country of countries" value="{{country.id}}">{{country.name}}</ion-option>
+                </ion-select>
+              </ion-item>
+            <ion-item >
+                <ion-label style="font-family: Lucida sans" stacked>Enter A Bio</ion-label>
+                <ion-textarea no-lines formControlName="bio" ></ion-textarea>
+              </ion-item>
+      </ion-list>
+      <button color="primary" clear ion-button type="submit">Save</button>
+    </form>
+    </div>
+    <div *ngSwitchCase="'contact'">
+      <form [formGroup]="editprofileloc" (ngSubmit)="logFormTwo()">
+        <ion-list class="user-data-content">
+        <ion-item no-lines style="width:100%">
+              <ion-label color="primary" style="font-family: Lucida sans">Country</ion-label>
+              <ion-select (ionChange)="countryValue()" formControlName="country_of_residence">
+                <ion-option *ngFor="let country of countries" value="{{country.id}}">{{country.name}}</ion-option>
+              </ion-select>
+            </ion-item>
+            
+            <ion-item no-lines style="width:100%">
+              <ion-label color="primary" style="font-family: Lucida sans">State</ion-label>
+              <ion-select (ionChange)="stateValue()" formControlName="state_of_residence">
+                <ion-option *ngFor="let state of states" value="{{state.id}}">{{state.name}}</ion-option>
+              </ion-select>
+            </ion-item>
+            
+            <ion-item no-lines style="width:100%">
+              <ion-label color="primary" style="font-family: Lucida sans">City</ion-label>
+              <ion-select formControlName="city_of_residence">
+                <ion-option *ngFor="let city of cities" value="{{city.id}}">{{city.name}}</ion-option>
+              </ion-select>
+            </ion-item><br><br>
+            <hr no-padding>
+
+           
+
+            <ion-item >
+                <ion-label style="font-family: Lucida sans" stacked>Enter Home Address</ion-label>
+                <ion-textarea no-lines formControlName="address" ></ion-textarea>
+              </ion-item>
+              
+              </ion-list>
+              <button  color="primary" clear style="margin-left:21px" ion-button type="submit">Save</button>
+            </form>
+  </div>
+</div>
+      </ion-content>
+      <!-- <ion-footer>
+    <ion-navbar color="third">
+      <ion-buttons end>
+        <button (click)="close()" ion-button>
+          Close
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-footer> -->

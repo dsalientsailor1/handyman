@@ -1,6 +1,8 @@
 {
   "name": "EasyChow",
-  "app_id": "",
+  "app_id": "01a884cd",
   "type": "ionic-angular",
-  "integrations": {}
+  "integrations": {
+    "cordova": {}
+  }
 }
