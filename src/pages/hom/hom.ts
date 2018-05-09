@@ -23,12 +23,11 @@ import * as global from '../../app/global';
   templateUrl: 'hom.html'
 })
 export class HomPage {
-  public globals:any = global.config;
   categories: any;
   show: boolean = true;
+  public globals:any = global.config;
   autocomplete: { input: string; };
   public list: any;
-  
   // public globals:any = global.config;
   result:boolean;
   logged: boolean = false;
@@ -45,14 +44,12 @@ export class HomPage {
       this.categories = data.data;
       loading.dismiss();
       console.log(data);
-      console.log("----------------");
       console.log(this.categories);
   }, error => {
     console.log("Ooops!");
     loading.dismiss();
     this.show = false;
     });
-    
     this.autocomplete = { input: '' };
     if(localStorage.getItem('user') == null){
       

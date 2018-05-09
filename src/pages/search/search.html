@@ -61,8 +61,8 @@
           <ion-segment-button value="individual_result" style="color:#6b6b6b">
           <ion-icon style="font-size: 17px">Individuals</ion-icon>
           </ion-segment-button>
-          <ion-segment-button  value="map_view" style="color:#6b6b6b">
-            <ion-icon (click)="showMap()" style="font-size: 17px">Map</ion-icon>
+          <ion-segment-button (click)="showMap()"  value="map_view" style="color:#6b6b6b">
+            <ion-icon style="font-size: 17px">Map</ion-icon>
             </ion-segment-button>
         </ion-segment>
       </div>
@@ -114,8 +114,6 @@
               <button ion-button (click)="run()" small color="purple" >Request</button>
           </div>
           </div>
-
-          uyjuyjuyjyujyujuyjuj
-            <div *ngIf="showMapStatus" #map id='map'></div>
+            <div #map id='map'></div>
 </ion-content>
 

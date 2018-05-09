@@ -1,5 +1,5 @@
 import { PreloadImageComponent } from './../components/preload-image/preload-image';
-// import { BackgroundImage } from '../components/background-image/background-image';
+import { BackgroundImage } from './../components/background-image/background-image';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -45,6 +45,7 @@ import { Diagnostic } from '@ionic-native/diagnostic';
   declarations: [
     MyApp,
     HomePage,
+    BackgroundImage,
     TabsPage,
     SignupmodalPage,
     SignhandymodalPage,
@@ -98,7 +99,8 @@ import { Diagnostic } from '@ionic-native/diagnostic';
     SignupmodalPage,
     ServicePage,
     HomPage,
-    ProfilePage
+    ProfilePage,
+    BackgroundImage
   ],
   providers: [
     StatusBar,
@@ -111,6 +113,6 @@ import { Diagnostic } from '@ionic-native/diagnostic';
     Diagnostic,
     HTTP
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA] 
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule {}

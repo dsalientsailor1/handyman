@@ -8,6 +8,7 @@
 	color: $color;
 	margin: 0px;
 }
+
 page-hom {
 
      .background {
@@ -135,7 +136,7 @@ page-hom {
               {
                 border-radius: 10.0rem;
                 background: rgba(71, 61, 139, 0.236);
-                // box-shadow: 0px 7px 14px -1px rgba(0, 0, 0, 0.659);
+                box-shadow: 0px 7px 14px -1px rgba(0, 0, 0, 0.659);
                 
                 // color: $theme-color-2;
                 // background-color: $white-c;
@@ -166,145 +167,151 @@ page-hom {
     
        
       // geolocato-ends
-      //background-image
-      $categories-heading-image-height: 150px;
-      $categories-grid-padding: 10px;
-      $categories-horizontal-list-padding: 10px;
-    
-      .listing-header
-      {
-        .header-logo
-        {
-          width: 34vw;
-        }
-      }
-    
-      .listing-content
-      {
-        .image-heading
-        {
-          height: $categories-heading-image-height;
-    
-          .bg-overlay
-          {
-            z-index: 1;
-            background-color: rgba($black-c, .6);
-          }
-    
-          ion-spinner {
-            z-index: 2;
-          }
-    
-          @include spinner-color($white);
-    
-          .heading-row
-          {
-            height: 100%;
-            z-index: 3;
-            position: absolute;
-            align-items: center;
-    
-            .main-title
-            {
-              @include categories-title-style($white);
-              font-size: 10vw;
-            }
-          }
-        }
-    
-        .categories-title
-        {
-          font-size: 1.2rem;
-          font-weight: 400;
-          letter-spacing: 0.7px;
-          color: $white-d;
-          margin: 8px 16px 16px;
-        }
-    
-        .horizontal-categories
-        {
-          border-bottom: 10px solid $white-a;
-          @include element-shadow();
-          padding-bottom: 16px;
-    
-          .scroll-content
-          {
-            position: relative;
-            contain: style layout;
-          }
-    
-          preload-image {
-            border-radius: 50%;
-    
-            img	{
-              border-radius: 50%;
-            }
-          }
-    
-          .categories-row
-          {
-            &::after{
-              content: '';
-              flex: 0 0 $categories-horizontal-list-padding;
-              max-width: $categories-horizontal-list-padding;
-            }
-          }
-    
-          .horizontal-item
-          {
-            padding: 0px 0px 0px $categories-horizontal-list-padding;
-          }
-        }
-    
-        .grid-categories
-        {
-          padding: 0px ($categories-grid-padding/2);
-          flex-wrap: wrap;
-    
-          .category-item
-          {
-            padding: 0px ($categories-grid-padding/2) $categories-grid-padding;
-    
-            .category-heading
-            {
-              padding-bottom: 100%;
-    
-              .bg-overlay
-              {
-                z-index: 1;
-                background-color: rgba($black-c, .6);
-              }
-    
-              ion-spinner {
-                z-index: 2;
-              }
-    
-              @include spinner-color($white);
-    
-              .heading-row
-              {
-                height: 100%;
-                z-index: 3;
-                position: absolute;
-                align-items: center;
-                .category-title
-                {
-                  @include categories-title-style($white);
-                }
-              }
-            }
-          }
-        }
-      }
-  
-      
+   //grid
 
 
-     
 
-      .category-image{
-        cursor:pointer !important;
-        background: red !important;
-      }
+
+
+
+
+
+
+
+   $categories-heading-image-height: 150px;
+   $categories-grid-padding: 10px;
+   $categories-horizontal-list-padding: 10px;
+ 
+   .listing-header
+   {
+     .header-logo
+     {
+       width: 34vw;
+     }
+   }
+ 
+   .listing-content
+   {
+     .image-heading
+     {
+       height: $categories-heading-image-height;
+ 
+       .bg-overlay
+       {
+         z-index: 1;
+         background-color: rgba($black-c, .6);
+       }
+ 
+       ion-spinner {
+         z-index: 2;
+       }
+ 
+       @include spinner-color($white);
+ 
+       .heading-row
+       {
+         height: 100%;
+         z-index: 3;
+         position: absolute;
+         align-items: center;
+ 
+         .main-title
+         {
+           @include categories-title-style($white);
+           font-size: 10vw;
+         }
+       }
+     }
+ 
+     .categories-title
+     {
+       font-size: 1.2rem;
+       font-weight: 400;
+       letter-spacing: 0.7px;
+       color: $white-d;
+       margin: 8px 16px 16px;
+     }
+ 
+     .horizontal-categories
+     {
+       border-bottom: 10px solid $white-a;
+       @include element-shadow();
+       padding-bottom: 16px;
+ 
+       .scroll-content
+       {
+         position: relative;
+         contain: style layout;
+       }
+ 
+       preload-image {
+         border-radius: 50%;
+ 
+         img	{
+           border-radius: 50%;
+         }
+       }
+ 
+       .categories-row
+       {
+         &::after{
+           content: '';
+           flex: 0 0 $categories-horizontal-list-padding;
+           max-width: $categories-horizontal-list-padding;
+         }
+       }
+ 
+       .horizontal-item
+       {
+         padding: 0px 0px 0px $categories-horizontal-list-padding;
+       }
+     }
+ 
+     .grid-categories
+     {
+       padding: 0px ($categories-grid-padding/2);
+       
+       flex-wrap: wrap;
+ 
+       .category-item
+       {
+         padding: 0px ($categories-grid-padding/2) $categories-grid-padding;
+        
+         .category-heading
+         {
+           padding-bottom: 100%;
+ 
+           .bg-overlay
+           {
+             z-index: 1;
+             background-color: rgba($black-c, .6);
+           }
+ 
+           ion-spinner {
+             z-index: 2;
+           }
+ 
+           @include spinner-color($white);
+ 
+           .heading-row
+           {
+             height: 100%;
+             z-index: 3;
+             position: absolute;
+             
+             align-items: center;
+ 
+             .category-title
+             {
+               @include categories-title-style($white);
+             }
+           }
+         }
+       }
+     }
+   }
+
+
+
+
 }
-
