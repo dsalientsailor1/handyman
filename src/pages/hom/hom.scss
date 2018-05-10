@@ -6,17 +6,18 @@
 	font-weight: 900;
 	letter-spacing: 0.4px;
 	color: $color;
-	margin: 0px;
+	margin: 10px;
 }
 
 page-hom {
-
+    
      .background {
+        // background: #e0e0e0;
           background: url(../assets/imgs/sat.jpg)!important;
          
-          background-size: cover !important;
-          background-repeat: no-repeat !important;
-          background-position: center center;
+          // background-size: cover !important;
+          // background-repeat: no-repeat !important;
+          // background-position: center center;
           
       }
 
@@ -135,8 +136,8 @@ page-hom {
               .searchbar-input
               {
                 border-radius: 10.0rem;
-                background: rgba(71, 61, 139, 0.236);
-                box-shadow: 0px 7px 14px -1px rgba(0, 0, 0, 0.659);
+                background: rgba(128, 128, 128, 0.2);
+                // box-shadow: 0px 7px 14px -1px rgba(0, 0, 0, 0.659);
                 
                 // color: $theme-color-2;
                 // background-color: $white-c;
@@ -157,13 +158,18 @@ page-hom {
           .search-results
           {
             padding: 10px;
-            padding-top: 0px;
+            padding-left: 10px;
           }
         }
 
-        // .search-options-list{
-        //   background-color:rgba(255, 255, 255, 0)
-        // }
+        .search-options-list{
+          background-color:rgba(255, 255, 255, 0);
+          font-family: Lucida Sans;
+          border-top: 0px;
+          border-left: 1px solid rgb(192, 192, 192);
+          border-right: 1px solid rgb(192, 192, 192);
+          border-bottom: 1px solid rgb(192, 192, 192);
+        }
     
        
       // geolocato-ends
@@ -269,7 +275,8 @@ page-hom {
  
      .grid-categories
      {
-       padding: 0px ($categories-grid-padding/2);
+      //  padding: 0px ($categories-grid-padding/2);
+      margin-left: 5px;
        
        flex-wrap: wrap;
  
@@ -303,7 +310,12 @@ page-hom {
  
              .category-title
              {
-               @include categories-title-style($white);
+              //  @include categories-title-style($white);
+               font-size: 200px !important;
+               font-weight: 400;
+               letter-spacing: 0.7px;
+               color: $white-d;
+               margin: 8px 16px 16px;
              }
            }
          }
@@ -312,6 +324,12 @@ page-hom {
    }
 
 
-
-
+  
 }
+
+.home-category:active{
+        background:#ccc;
+      }
+.home-category{
+        // background:#fff;
+      }

@@ -44,7 +44,7 @@ export class EditprofilePage {
     this.http.get(global.config.baseUrl+'controllers/mobile/fetch_countries.php').map(res => res.json()).subscribe(data => {
 
       // this.showcategories = true;
-      this.countries = data.status;
+      this.countries = data.data;
       console.log(data);
       console.log(this.countries);
   });
@@ -52,7 +52,7 @@ export class EditprofilePage {
     this.http.get(global.config.baseUrl+'controllers/mobile/fetch_individual_details.php?&id='+this.user.id+'').map(res => res.json()).subscribe(data => {
       // global.config.baseUrl+'controllers/mobile/fetch_my_companies.php'
       // this.showcategories = true;
-      this.current = data.status;
+      this.current = data.data;
       console.log(data);
       console.log(this.current);
       this.profileedit.setValue({
@@ -125,7 +125,7 @@ export class EditprofilePage {
     this.http.get(global.config.baseUrl+'controllers/mobile/fetch_states.php?&id='+this.editprofileloc.value.country_of_residence+'').map(res => res.json()).subscribe(data => {
     
     // this.showcategories = true;
-    this.states = data.status;
+    this.states = data.data;
     console.log(data);
     console.log(this.states);
 });
@@ -135,7 +135,7 @@ export class EditprofilePage {
     this.http.get(global.config.baseUrl+'controllers/mobile/fetch_cities.php?&id='+this.editprofileloc.value.state_of_residence+'').map(res => res.json()).subscribe(data => {
     
     // this.showcategories = true;
-    this.cities = data.status;
+    this.cities = data.data;
     console.log(data);
     console.log(this.cities);
 });

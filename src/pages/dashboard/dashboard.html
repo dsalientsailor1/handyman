@@ -1,27 +1,20 @@
-<!--
-  Generated template for the DashboardPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-
-
 
 <ion-content class="profile-content">
+    <div *ngIf="logged">
         <div class="user-details">
     <ion-row class="user-main-data-row">
       <ion-col no-padding width-33>
-        <preload-image class="user-image" [ratio]="{w:1, h:1}" src="./assets/imgs/handymantwo.jpg" alt="profile.user.name" title="profile.user.name"></preload-image>
+        <preload-image class="user-image" [ratio]="{w:1, h:1}" src="./assets/imgs/handymantwo.jpg" alt="" title=""></preload-image>
       </ion-col>
       <ion-col no-padding>
         <ion-row class="social-presence-row">
-          <ion-col width-50 class="social-presence-item">
+          <ion-col col-6 class="social-presence-item">
             <a>
               <h2 class="social-presence-value">12</h2>
               <h4 class="social-presence-title">Tasks Completed</h4>
             </a>
           </ion-col>
-          <ion-col width-50 class="social-presence-item">
+          <ion-col col-6 class="social-presence-item">
             <a>
               <h2 class="social-presence-value">20</h2>
               <h4 class="social-presence-title">Times Contacted</h4>
@@ -39,7 +32,7 @@
     </ion-row>
     <ion-row wrap class="user-bio-row">
       <ion-col no-padding width-50>
-        <h2 class="user-name">{{this.user.first_name}}</h2>
+        <h2 class="user-name"></h2>
       </ion-col>
       <ion-col no-padding width-50>
         <span class="user-location">Painting</span>
@@ -60,16 +53,26 @@
       </ion-col>
     </ion-row>
     </div>
-        
+    </div>
 
 </ion-content>
-<ion-footer>
-  <ion-navbar color="third">
-    <ion-buttons end>
-      <button (click)="close()" ion-button>
-        Close
-      </button>
-    </ion-buttons>
-  </ion-navbar>
-</ion-footer>
+<ion-content class="log">
+    <div *ngIf="!logged">
+        
+        <div style="padding-top:63%" padding>
+            
+          <ion-item color="light">
+              <button style="border-radius:20px" ion-button block (click)="goToReg()"  color="first" class="login-button">REGISTER</button>
+          </ion-item>
+          <ion-item color="light">
+              <button style="border-radius:20px" ion-button block (click)="goToLog()"  color="first" class="login-button">Login</button>
+          </ion-item>
+          
+          
+        </div>
+        
+        </div>
+</ion-content>
+
+
 

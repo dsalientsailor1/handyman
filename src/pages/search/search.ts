@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController,AlertController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { ProfilesProvider } from '../../providers/services/profiles';
 import { ProfilePage } from '../profile/profile';
@@ -35,8 +35,9 @@ export class SearchPage {
   list: any;
   autocomplete: { input: string; };
   pos: any;
-  lng: number;
-  lat: number;
+  lng: number  = 0;
+  lat: number = 0;
+  cid: any;
   public globals:any = global.config;
   company_handymen: any;
   individual_handymen: any;
@@ -46,30 +47,54 @@ export class SearchPage {
   public pet: any;
   public loc: any;
 public showmap:boolean = false;
+map_status:boolean = false;
+show_map_status:boolean=false;
+interval:any;
+
 
   labels: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   labelIndex = 0;
 
 
 
-  constructor(private diagnostic: Diagnostic,public loadingCtrl: LoadingController, private geolocation: Geolocation, private http: Http, public profilesProv:ProfilesProvider, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private diagnostic: Diagnostic,public loadingCtrl: LoadingController, private geolocation: Geolocation, private http: Http, public profilesProv:ProfilesProvider, public navCtrl: NavController, public navParams: NavParams,
+  private alertController: AlertController) {
 
-    let successCallback = (isAvailable) => {alert(';yes') };
-let errorCallback = (e) => alert(e);
-alert('ee');
-this.diagnostic.isLocationEnabled().then(successCallback).catch(errorCallback);
+    this.interval = setInterval(function(){ 
+      if(this.show_map_status == true && this.map_status == false){
+          this.showmap();
+      }else{
+        clearInterval(this.interval);
+      }
+     }, 3000);
+//isLocationAuthorized()
+// requestLocationAuthorization(mode)
+// getLocationMode()
 
-// only android
-this.diagnostic.isGpsLocationEnabled().then(successCallback, errorCallback);
+diagnostic.registerLocationStateChangeHandler(function(state){
+  alert('dcdscdcsdc');
+    if(state !== diagnostic.locationMode.LOCATION_OFF){
+      this.showMap();
+    //     || (device.platform === "iOS") && ( state === cordova.plugins.diagnostic.permissionStatus.GRANTED
+    //         || state === cordova.plugins.diagnostic.permissionStatus.GRANTED_WHEN_IN_USE
+    // )){
+    //     console.log("Location is available");
+
+
+     }
+});
+  
+
 
     this.autocomplete = { input: '' };
     this.pet = "individual_result"
     // this.profiles = profilesProv.getAll();
     this.idfromcat  = this.navParams.get('idfrom');
+    this.cid  = this.navParams.get('cityid');
     
                           //fetching individual
                          
-                         console.log(global.config.baseUrl+'controllers/mobile/fetch_individual_services.php?&id='+this.idfromcat+'');
+                         console.log(global.config.baseUrl+'controllers/mobile/fetch_individual_services.php?id='+this.idfromcat+'&city='+this.cid+'&lat='+this.lat+'&lng='+this.lng+'');
                          let loading = this.loadingCtrl.create({
                           content: ''
                         });
@@ -86,7 +111,7 @@ this.diagnostic.isGpsLocationEnabled().then(successCallback, errorCallback);
           }
       });
                          //fetching company
-                         console.log(global.config.baseUrl+'controllers/mobile/fetch_company_services.php?&id='+this.idfromcat+'');
+                         console.log(global.config.baseUrl+'controllers/mobile/fetch_company_services.php?id='+this.idfromcat+'&city='+this.cid+'&lat='+this.lat+'&lng='+this.lng+'');
     this.http.get(global.config.baseUrl+'controllers/mobile/fetch_company_services.php?&id='+this.idfromcat+'').map(res => res.json()).subscribe(data => {
       console.log(data);
       switch(data.status){
@@ -208,12 +233,12 @@ this.diagnostic.isGpsLocationEnabled().then(successCallback, errorCallback);
 
 
 startMap() {
-   var directionsService = new google.maps.DirectionsService;
-        var directionsDisplay = new google.maps.DirectionsRenderer;
+  alert('start');
+        // var directionsService = new google.maps.DirectionsService;
+        // var directionsDisplay = new google.maps.DirectionsRenderer;
 
 
-  let myLocation = {  lat: 6.430102, lng: 3.422202}
- // let myLocation3 = {  lat: 7.430102, lng: 4.422202}
+let myLocation = {  lat: this.lat, lng: this.lng}
 let myLocation2 = new google.maps.LatLng( myLocation);
   
   this.map = new google.maps.Map(this.mapElement.nativeElement, {
@@ -221,49 +246,12 @@ let myLocation2 = new google.maps.LatLng( myLocation);
     center: myLocation,
     mapTypeId: 'roadmap'
   });
- 
-directionsDisplay.setMap(this.map);
+ this.map_status = true;
+// directionsDisplay.setMap(this.map);
 
-
-
-
-  this.individual_handymen.forEach(option => {
-     var img = global.config.baseUrl+option.thumb;
-    var handyIndividual = new google.maps.LatLng( 6.440103,3.492203);
-    //google.maps.geometry.spherical.computeDistanceBetween (latLngA, latLngB);
-   var g =  google.maps.geometry.spherical.computeDistanceBetween(handyIndividual, myLocation2) / 1000;
-    var distance = g.toFixed(2);
-
-      var contentString = '<div id="content"> <div id="siteNotice"></div>    <div><img class="img-full-width" src="'+img+'">  </div>   ';
-          contentString +='<div>';
-      
-          contentString +='      <h3 align="center" id="firstHeading" class="firstHeading">'+option.first_name+' '+option.last_name+'</h3>   ';
-          contentString +='         <div align="center" id="bodyContent"> <p>'+option.city+', ' +option.state_name+'</p>  ';
-          contentString +='           <p align="center">'+option.phone1+'</p>   ';
-            contentString +='           <p align="center"><strong>'+distance+'km from you</strong></p>   ';
-          contentString +='   </div>    ';
-          contentString +='  </div>';
-
-              var infowindow = new google.maps.InfoWindow({
-          content: contentString,
-           maxWidth: 150
-        });
-
-
-             
-              this.addMarker(handyIndividual, this.map,img,infowindow);
-
-
-        //          var marker = new google.maps.Marker({
-        //   position: uluru,
-        //   map: map,
-        //   title: 'Uluru (Ayers Rock)'
-        // });
-        // marker.addListener('click', function() {
-        //   infowindow.open(map, marker);
-        // });
-
-
+this.addMarker(myLocation2, this.map,'http://www.easyacesynergy.com/easyhr/marker.png','') ;
+this.showHandyMenOnMap(this.individual_handymen,'Individual');
+this.showHandyMenOnMap(this.company_handymen,'Company');
 
 //  this.http.get('https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=AIzaSyDdw262adSCagHNxfzDIi4UTKC1fI4cCE8').map(res => res.json()).subscribe(data => {
 //     console.log('----'+data);
@@ -299,14 +287,35 @@ directionsDisplay.setMap(this.map);
 
         
               
-              });
+            //  });
 
 
   }
-
+public  showDirection(){
+  alert('sdcscfsdcdsc');
+}
 showMap(){
- // console.log(this.individual_handymen);
-  this.startMap();
+  //check if gps is on
+  alert('a');
+  this.show_map_status = true;
+  let successCallback = (isAvailable) => {};
+  let errorCallback = (e) =>{} ;
+
+  this.diagnostic.isLocationAvailable().then(successCallback).catch(errorCallback);
+  this.diagnostic.isGpsLocationAvailable().then(successCallback, errorCallback);
+   
+  this.diagnostic.getLocationMode()
+    .then((state) => {
+      if (state == this.diagnostic.locationMode.LOCATION_OFF) {
+          this.showGpsAlert();
+      } else {
+        alert('b');
+           this.startGPS();
+      }
+    }).catch(e => console.error(e));
+
+  
+ 
 }
 
 
@@ -332,14 +341,16 @@ var shape = {
        zoom: 4,
       label: this.labels[this.labelIndex++ % this.labels.length],
       map: map,
-        shape: shape,
+      shape: shape,
 	  // icon:'http://easyacesynergy.com/easyhr/marker.png'
     icon:icon
-    });
-	marker.addListener('click', function() {
-           infowindow.open(map, marker);
-         });
-
+  });
+  
+  if(infowindow !=''){
+        marker.addListener('click', function() {
+                infowindow.open(map, marker);
+              });
+  }
 	//.///marker.setIcon('http://easyacesynergy.com/easyhr/marker.png');
 	
   }
@@ -352,5 +363,102 @@ var shape = {
     this.navCtrl.push(MapPage);
   }
 
+
+
+showGpsAlert(){
+
+      let gpsAlert = this.alertController.create({
+      title: "Noice!!!",
+      message: "Please switch on your Location Services",
+      buttons: [
+        {
+          text: "Cancel"
+        },
+        {
+          text: "Goto Settings",
+          handler: (inputData)=> {
+            this.diagnostic.switchToLocationSettings();
+           
+          }
+        }
+      ]
+    });
+    gpsAlert.present();
+ 
+}
+
+startGPS(){
+alert('c');
+      this.geolocation.getCurrentPosition().then((resp) => {
+               this.lat = resp.coords.latitude,
+                this.lng = resp.coords.longitude
+                this.pos={latit: this.lat, lngit:this.lng};
+alert('d');
+  if(this.lat>0 && this.lng >0 && !this.map_status){
+                    this.startMap();
+                }
+           
+           
+     }).catch((error) => {
+       alert(error);
+       console.log('Error getting location', error);
+     });
+     let watch = this.geolocation.watchPosition();
+      watch.subscribe((data) => {
+       
+            this.lat = data.coords.latitude,
+            this.lng = data.coords.longitude
+            this.pos={latit: this.lat, lngit:this.lng};
+               if(this.lat>0 && this.lng >0 && !this.map_status){
+                    this.startMap();
+                }
+           
+      })
+   
+}
+
+
+
+  // var handy = new google.maps.LatLng( 6.440103,3.492203);
+  //   //google.maps.geometry.spherical.computeDistanceBetween (latLngA, latLngB);
+  
+showHandyMenOnMap(data,type){
+
+  data.forEach(option => {
+          var handy = new google.maps.LatLng(option.latitude,option.longitude);
+          let myLocation = {  lat: this.lat, lng: this.lng}
+          let myLocation2 = new google.maps.LatLng( myLocation);
+
+     var g =  google.maps.geometry.spherical.computeDistanceBetween(handy, myLocation2) / 1000;
+     var distance = g.toFixed(2);
+
+
+        
+         var img = global.config.baseUrl+option.thumb;
+          var contentString = '<div id="content"> <div id="siteNotice"></div>    <div><img class="img-full-width" src="'+img+'"> <br>'+type+' </div>   ';
+          contentString +='<div>';
+      
+          contentString +='      <h3 align="center" id="firstHeading" class="firstHeading">'+option.first_name+' '+option.last_name+'</h3>   ';
+          contentString +='         <div align="center" id="bodyContent"> <p>'+option.city+', ' +option.state_name+'</p>  ';
+          contentString +='           <p align="center">'+option.phone1+'</p>   ';
+          contentString +='           <p onClick="showDirection()" align="center"><strong>'+distance+'km from you</strong></p>   ';
+          contentString +='   </div>    ';
+          contentString +='  </div>';
+
+              var infowindow = new google.maps.InfoWindow({
+                  content: contentString,
+                  maxWidth: 150
+                  });
+
+
+             
+              this.addMarker(handy, this.map,img,infowindow);
+            })
+
+}
+
+hideMap(){
+
+}
 
 }

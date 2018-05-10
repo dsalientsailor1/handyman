@@ -45,7 +45,7 @@ export class CompanyPage {
     this.http.get(global.config.baseUrl+'controllers/mobile/fetch_categories.php').map(res => res.json()).subscribe(data => {
       // global.config.baseUrl+'controllers/mobile/fetch_categories.php'
       // this.showcategories = true;
-      this.categories = data.status;
+      this.categories = data.data;
       console.log(data);
       console.log(this.categories);
   });
@@ -53,7 +53,7 @@ export class CompanyPage {
   this.http.get(global.config.baseUrl+'controllers/mobile/fetch_my_companies.php?&id='+this.user.id+'').map(res => res.json()).subscribe(data => {
     // global.config.baseUrl+'controllers/mobile/fetch_my_companies.php'
     // this.showcategories = true;
-    this.companies = data.status;
+    this.companies = data.data;
     console.log(data);
     console.log(this.companies);
 });
@@ -62,7 +62,7 @@ export class CompanyPage {
   this.http.get(global.config.baseUrl+'controllers/mobile/fetch_countries.php').map(res => res.json()).subscribe(data => {
 
     // this.showcategories = true;
-    this.countries = data.status;
+    this.countries = data.data;
     console.log(data);
     console.log(this.countries);
 });
@@ -117,7 +117,7 @@ this.company_setup = this.formBuilder.group({
     this.http.get(global.config.baseUrl+'controllers/mobile/fetch_services.php?&id='+this.company_setup.value.category+'').map(res => res.json()).subscribe(data => {
     
     // this.showcategories = true;
-    this.services = data.status;
+    this.services = data.data;
     console.log(data);
     console.log(this.services);
 });
@@ -128,7 +128,7 @@ this.company_setup = this.formBuilder.group({
     this.http.get(global.config.baseUrl+'controllers/mobile/fetch_states.php?&id='+this.company.value.company_country+'').map(res => res.json()).subscribe(data => {
     
     // this.showcategories = true;
-    this.states = data.status;
+    this.states = data.data;
     console.log(data);
     console.log(this.states);
 });
@@ -139,7 +139,7 @@ this.company_setup = this.formBuilder.group({
     this.http.get(global.config.baseUrl+'controllers/mobile/fetch_cities.php?&id='+this.company.value.company_state+'').map(res => res.json()).subscribe(data => {
     
     // this.showcategories = true;
-    this.cities = data.status;
+    this.cities = data.data;
     console.log(data);
     console.log(this.cities);
 });

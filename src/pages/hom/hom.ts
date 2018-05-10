@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, PopoverController, ModalController, AlertController, LoadingController } from 'ionic-angular';
+import { NavController, PopoverController, ModalController, AlertController, LoadingController, NavParams } from 'ionic-angular';
 import { SignupPage } from '../../pages/signup/signup';
+import { DropdownmenuPage } from '../../pages/dropdownmenu/dropdownmenu';
 import { Geolocation } from '@ionic-native/geolocation';
 import { MessagesPage } from '../../pages/messages/messages';
 import { HomePage } from '../../pages/home/home';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
-import { CategoriesProvider } from '../../providers/services/categories';
+import { GlobalServiceProvider } from './../../providers/global-service/global-service';
 import { ServiceProvider } from '../../providers/services/service';
 
 // http services
@@ -23,6 +24,7 @@ import * as global from '../../app/global';
   templateUrl: 'hom.html'
 })
 export class HomPage {
+  cityid: any;
   categories: any;
   show: boolean = true;
   public globals:any = global.config;
@@ -31,8 +33,9 @@ export class HomPage {
   // public globals:any = global.config;
   result:boolean;
   logged: boolean = false;
-
-  constructor(public loadingCtrl: LoadingController, private geolocation: Geolocation, public serviceProv:ServiceProvider, private http: Http, public navCtrl: NavController, public modal: ModalController, public popoverCtrl: PopoverController, private alert: AlertController) {
+  showLoading:boolean=true;
+  constructor(public loadingCtrl: LoadingController, private geolocation: Geolocation, public globalservice:GlobalServiceProvider, private http: Http, public navCtrl: NavController, public modal: ModalController, public popoverCtrl: PopoverController, private alert: AlertController, public navParams: NavParams) {
+    this.cityid  = this.navParams.get('cid');
     console.log(global.config.baseUrl+'controllers/mobile/home.php');
     let loading = this.loadingCtrl.create({
       content: ''
@@ -40,7 +43,6 @@ export class HomPage {
     loading.present()
     this.http.get(global.config.baseUrl+'controllers/mobile/home.php').map(res => res.json()).subscribe(data => {
       // global.config.baseUrl+'controllers/mobile/fetch_categories.php'
-      this.show = true;
       this.categories = data.data;
       loading.dismiss();
       console.log(data);
@@ -70,8 +72,8 @@ export class HomPage {
  
   }
 
-  openService(id){
-    this.navCtrl.push(ServicePage, {id:id})
+  openService(id, name){
+    this.navCtrl.push(ServicePage, {id:id, name:name})
   }
   presentSignup(myEvent) {
     console.log(myEvent);
@@ -80,7 +82,13 @@ export class HomPage {
       ev: myEvent
     });
   }
-
+  drop(myEvent) {
+    console.log(myEvent);
+    let popover = this.popoverCtrl.create(DropdownmenuPage);
+    popover.present({
+      ev: myEvent
+    });
+  }
   login() {
     let alert = this.alert.create({
       title: 'Login',
@@ -139,14 +147,20 @@ dashboard() {
 searchResult(event) {
   console.log(this.autocomplete.input.length);
   console.log(this.autocomplete.input);
-  if(this.autocomplete.input.length > 2){
+  this.result = true;
+  
+    if(this.autocomplete.input.length ==0){
+         this.result = false;
+          this.list = null;
+    }else if(this.autocomplete.input.length > 2){
     console.log(global.config.baseUrl+'controllers/mobile/search.php?&q='+this.autocomplete.input+'');
   this.http.get(global.config.baseUrl+'controllers/mobile/search.php?&q='+this.autocomplete.input+'').map(res => res.json()).subscribe(data => {
     // global.config.baseUrl+'controllers/mobile/fetch_categories.php'
-    this.list = data.status;
+    this.list = data.data;
     console.log(data);
     // console.log(this.list);
-    this.result = true;
+   
+    this.showLoading=false;
 }, error => {
   console.log("Ooops!");
   this.show = false;
@@ -158,10 +172,12 @@ searchResult(event) {
 clearSearch(event) {
   console.log('stuffs')
   this.result = false;
+  alert('naso')
+  this.list = null;
 }
 
 selectSearchResult(id){
-  this.navCtrl.push(SearchPage, {idfrom:id});
+  this.navCtrl.push(SearchPage, {idfrom:id, cityid:this.globalservice.city});
 }
 
 useLocator(){
@@ -188,5 +204,9 @@ reload(){
   window.location.reload()
 }
 
+
+returnImagePath(object):string{
+return 'url("http://www.easyacesynergy.com/easyhr/marker.png")';
+}
 }
 

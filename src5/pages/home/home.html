@@ -1,0 +1,97 @@
+<ion-header no-border>
+    <ion-navbar color="light">
+      <ion-grid>
+      <ion-row >
+      <ion-col col-4>
+      <div>
+      <ion-buttons>
+        <button ion-button menuToggle>
+          <ion-icon style="color:rgb(0, 0, 0)" name="menu"></ion-icon>
+        </button>
+      </ion-buttons>
+      </div>
+      </ion-col>
+      <ion-col col-4>
+      <div>
+        <!-- <img src="./assets/imgs/radr.png"/> -->
+      </div>
+      </ion-col>
+      <ion-col col-4>
+      <div>
+      <ion-buttons end >
+      <button [disabled]="logged === true" ion-button tappable (click)="presentSignup($event)">
+      <ion-icon style="color:rgb(0, 0, 0)" name="md-contact"></ion-icon>
+      </button>
+      <button (click)="useLocator()" ion-button tappable>
+      <ion-icon style="color:rgb(0, 0, 0)" name="pin"></ion-icon>
+      </button>
+      </ion-buttons>
+      </div>
+      </ion-col>
+      </ion-row>
+      </ion-grid>
+     </ion-navbar>
+      </ion-header>
+  
+  
+  <ion-content class="background">
+    <div *ngIf="show">
+    <div class="search-container">
+    <ion-toolbar color="light"  class="search-toolbar">
+      <ion-searchbar (ionInput)="searchResult($event)" [(ngModel)]="autocomplete.input" (ionClear)="clearSearch($event)" class="search-places-bar" placeholder="Search a Service"></ion-searchbar>
+      </ion-toolbar>
+  
+      
+      <ion-list [hidden]="this.autocomplete.input.length == 0" *ngIf="result === true" class="search-options-list">
+          <ion-item *ngFor="let item of list" tappable (click)="selectSearchResult(item.id)">
+            {{ item.name }}
+          </ion-item>
+        </ion-list>
+        <ion-list *ngIf="result === false" class="search-results">
+            <ion-item tappable >
+              No result found
+            </ion-item>
+          </ion-list>
+    </div>
+  <div style="clear:both"></div>
+  <br><br><br>
+    <!-- [style.backgroundImage]="'url('+this.globals.baseUrl+'admin/uploads/category/'+category.path+')'"   -->
+    <div style="clear:both" *ngIf="show">
+      <ion-grid>
+      <ion-row style="height:25px">
+  
+  
+      <div class=""  style="width:33.333%" *ngFor="let category of categories; let i = index" >
+  
+      <ion-col col-6  >
+        <div class="category-image">
+            <div style="min-height:40%;min-width:50%">
+             
+              <img src="{{this.globals.baseUrl}}admin/uploads/category/{{category.mobile_path}}" (click)="openService(category.id, category.name)" />
+  
+              </div>
+           
+              <p style="margin-top:13px; color:black; text-align:center;" >{{category.name}}</p>
+  
+            </div>
+      
+      </ion-col>
+      </div>
+  
+  
+      </ion-row>
+      </ion-grid>
+      </div>
+    </div>
+    <div *ngIf="show === false">
+        <preload-image  [ratio]="{w:1, h:1}" src="./assets/imgs/nonet.png"></preload-image>
+        <button style="margin-left:45%" (click)="reload()" color="primary" clear ion-button>Try Again</button>
+  </div>
+  </ion-content>
+  
+  
+  
+  <!-- <ion-item no-lines style="border-radius:25px; padding: 0.25em 0.75em;">
+      <ion-input type="text" placeholder="Type name of HandyMan"></ion-input><ion-icon name="ios-search" item-right></ion-icon>
+    </ion-item>
+    <button outline (click)="searchResult()" style="margin-left:22px; color: white" ion-button>Search</button> -->

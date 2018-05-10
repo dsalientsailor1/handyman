@@ -1,0 +1,109 @@
+<!--
+  Generated template for the MessagesPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+
+
+<ion-content class="schedule-content">
+    <div>
+        <ion-segment [(ngModel)]="pet">
+          <ion-segment-button value="messages" style="color:#6b6b6b; font-size: 5px">
+          <ion-icon style="font-size: 17px">Messages {{this.countmsg}}</ion-icon>
+          </ion-segment-button>
+          <ion-segment-button value="notifications" style="color:#6b6b6b">
+          <ion-icon style="font-size: 17px">Notifications {{this.countnot}}</ion-icon>
+          </ion-segment-button>
+        </ion-segment>
+      </div>
+
+      <div [ngSwitch]="pet">
+          <div  *ngSwitchCase="'messages'">
+              <div *ngIf= "showmsg">
+                  <div>
+                      <ion-list class="schedule-list">
+                        <ion-item class="schedule-item" *ngFor="let msg of messages">
+                          <ion-row>
+                            <!-- <ion-col col-1 class="schedule-date">
+                              <h2 class="schedule-day">{{schedule.day}}</h2>
+                              <h3 class="schedule-month">{{schedule.month}}</h3>
+                              <h4 class="schedule-time">{{schedule.time}}</h4>
+                            </ion-col> -->
+                            <ion-col col-9 class="schedule-data">
+                              <div class="data-item">
+                                <div class="item-content">
+                                  <h2 class="item-title one-line">{{msg.message}}</h2>
+                                  <div class="item-description">
+                                    <ion-icon class="description-icon" name="person"></ion-icon>
+                                    <p class="description-text">{{msg.first_name}} {{msg.last_name}}</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </ion-col>
+                          </ion-row>
+                        </ion-item>
+                      </ion-list>
+                    </div> 
+                    </div>
+                    <div *ngIf="showmsg === false">
+                        <preload-image [ratio]="{w:1, h:1}" src="./assets/imgs/nomsg.png"></preload-image>
+                    </div>
+          </div>
+          
+          <div  *ngSwitchCase="'notifications'">
+              <div *ngIf="shownot">
+              
+          </div>
+            <div *ngIf="shownot === false">
+                <preload-image [ratio]="{w:1, h:1}" src="./assets/imgs/nomsg.png"></preload-image>
+            </div>
+            </div>
+            </div>
+
+
+
+</ion-content>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <!-- <div>
+        <ion-list class="schedule-list">
+          <ion-item class="schedule-item" *ngFor="let schedule of schedules">
+            <ion-row>
+              <ion-col col-1 class="schedule-date">
+                <h2 class="schedule-day">{{schedule.day}}</h2>
+                <h3 class="schedule-month">{{schedule.month}}</h3>
+                <h4 class="schedule-time">{{schedule.time}}</h4>
+              </ion-col>
+              <ion-col col-9 class="schedule-data">
+                <div class="data-item">
+                  <div class="item-content">
+                    <h2 class="item-title one-line">{{schedule.subject}}</h2>
+                    <div class="item-description">
+                      <ion-icon class="description-icon" name="clock"></ion-icon>
+                      <p class="description-text">{{schedule.date_full}}</p>
+                    </div>
+                    <div class="item-description">
+                      <ion-icon class="description-icon" name="pin"></ion-icon>
+                      <p class="description-text one-line">{{schedule.location}}</p>
+                    </div>
+                  </div>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+        </ion-list>
+      </div> -->

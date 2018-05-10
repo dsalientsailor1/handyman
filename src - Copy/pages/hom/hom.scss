@@ -1,0 +1,328 @@
+@mixin categories-title-style($color){
+	display: inline-block;
+	width: 100%;
+	text-align: center;
+	font-size: 8vw;
+	font-weight: 900;
+	letter-spacing: 0.4px;
+	color: $color;
+	margin: 10px;
+}
+
+page-hom {
+
+     .background {
+          background: url(../assets/imgs/sat.jpg)!important;
+         
+          background-size: cover !important;
+          background-repeat: no-repeat !important;
+          background-position: center center;
+          
+      }
+
+      //footer
+ ion-footer {
+          background: linear-gradient(316deg, #001aff, #4f61ff, #8e9aff, #b1b9fc, #d9ddff);
+          background-size: 1800% 1800%;
+          animation: rainbow 10s linear infinite;
+        }
+        @keyframes rainbow {
+          0% {
+            background-position: 0% 0%
+          }
+          50% {
+            background-position: 100% 100%
+          }
+          100% {
+            background-position: 0% 0%
+          }
+        }
+        //text
+        .htext{
+            font-family: Calibri light;
+            font-size: 1.95em;
+            text-align: center;
+            font-weight: 100;
+            padding: -3em 1.75em;
+            margin-top: 30%;
+            padding: 10px 10px;
+            color: black;
+          }
+        .inpu{
+            padding: 5px;
+        }
+
+        //badge
+        button {
+          ion-badge {
+            position: absolute;
+            top: -0.2rem;
+            right: -0.2rem;
+            opacity: 0.9;
+            
+        
+            & ~ ion-icon {
+              margin-right: 1.2rem;
+            }
+          }
+        }
+
+        // geolocator-stuffs
+      
+    
+        .search-container
+        {
+          position: absolute;
+          left: 0px;
+          right: 0px;
+          z-index: 4;
+    
+          .search-toolbar
+          {
+            padding: -5px 35px;
+            margin-left:0px;
+    
+            .toolbar-background
+            {
+              // background: color($colors, #ffffff, base);
+              border: none;
+              // @include element-shadow();
+            }
+    
+            &.transparent-background
+            {
+              .toolbar-background
+              {
+                background: transparent;
+                box-shadow: none;
+              }
+    
+              ion-searchbar.search-places-bar
+              {
+                .searchbar-input
+                {
+                  background-color:r#488aff;
+                }
+              }
+            }
+    
+            .bar-buttons
+            {
+              margin: 0px;
+    
+              .geolocation-button
+              {
+                // color: $black-d;
+                margin-left: 5px;
+                color: #f78f30d9;
+    
+                &.using-geolocation
+                {
+                  // color: $theme-color-1;
+                }
+              }
+            }
+    
+            ion-searchbar.search-places-bar
+            {
+              background: transparent;
+              padding: 0px 0px;
+              padding-left: 5px;
+              padding-right: 5px;
+              
+              border: none;
+    
+              .searchbar-input
+              {
+                border-radius: 10.0rem;
+                background: rgba(128, 128, 128, 0.466);
+                // box-shadow: 0px 7px 14px -1px rgba(0, 0, 0, 0.659);
+                
+                // color: $theme-color-2;
+                // background-color: $white-c;
+              }
+    
+              .searchbar-search-icon {
+                
+                ios-searchbar-icon{
+                  
+                };
+              }
+            }
+          }
+          ::-webkit-input-placeholder {
+            color: #488aff !important;
+          }
+    
+          .search-results
+          {
+            padding: 10px;
+            padding-left: 10px;
+          }
+        }
+
+        .search-options-list{
+          background-color:rgba(255, 255, 255, 0);
+          font-family: Lucida Sans;
+          border-top: 0px;
+          border-left: 1px solid rgb(192, 192, 192);
+          border-right: 1px solid rgb(192, 192, 192);
+          border-bottom: 1px solid rgb(192, 192, 192);
+        }
+    
+       
+      // geolocato-ends
+   //grid
+
+
+
+
+
+
+
+
+
+
+   $categories-heading-image-height: 150px;
+   $categories-grid-padding: 10px;
+   $categories-horizontal-list-padding: 10px;
+ 
+   .listing-header
+   {
+     .header-logo
+     {
+       width: 34vw;
+     }
+   }
+ 
+   .listing-content
+   {
+     .image-heading
+     {
+       height: $categories-heading-image-height;
+ 
+       .bg-overlay
+       {
+         z-index: 1;
+         background-color: rgba($black-c, .6);
+       }
+ 
+       ion-spinner {
+         z-index: 2;
+       }
+ 
+       @include spinner-color($white);
+ 
+       .heading-row
+       {
+         height: 100%;
+         z-index: 3;
+         position: absolute;
+         align-items: center;
+ 
+         .main-title
+         {
+           @include categories-title-style($white);
+           font-size: 10vw;
+         }
+       }
+     }
+ 
+     .categories-title
+     {
+       font-size: 1.2rem;
+       font-weight: 400;
+       letter-spacing: 0.7px;
+       color: $white-d;
+       margin: 8px 16px 16px;
+     }
+ 
+     .horizontal-categories
+     {
+       border-bottom: 10px solid $white-a;
+       @include element-shadow();
+       padding-bottom: 16px;
+ 
+       .scroll-content
+       {
+         position: relative;
+         contain: style layout;
+       }
+ 
+       preload-image {
+         border-radius: 50%;
+ 
+         img	{
+           border-radius: 50%;
+         }
+       }
+ 
+       .categories-row
+       {
+         &::after{
+           content: '';
+           flex: 0 0 $categories-horizontal-list-padding;
+           max-width: $categories-horizontal-list-padding;
+         }
+       }
+ 
+       .horizontal-item
+       {
+         padding: 0px 0px 0px $categories-horizontal-list-padding;
+       }
+     }
+ 
+     .grid-categories
+     {
+      //  padding: 0px ($categories-grid-padding/2);
+      margin-left: 5px;
+       
+       flex-wrap: wrap;
+ 
+       .category-item
+       {
+         padding: 0px ($categories-grid-padding/2) $categories-grid-padding;
+        
+         .category-heading
+         {
+           padding-bottom: 100%;
+ 
+           .bg-overlay
+           {
+             z-index: 1;
+             background-color: rgba($black-c, .6);
+           }
+ 
+           ion-spinner {
+             z-index: 2;
+           }
+ 
+           @include spinner-color($white);
+ 
+           .heading-row
+           {
+             height: 100%;
+             z-index: 3;
+             position: absolute;
+             
+             align-items: center;
+ 
+             .category-title
+             {
+              //  @include categories-title-style($white);
+               font-size: 200px !important;
+               font-weight: 400;
+               letter-spacing: 0.7px;
+               color: $white-d;
+               margin: 8px 16px 16px;
+             }
+           }
+         }
+       }
+     }
+   }
+
+
+
+
+}

@@ -38,12 +38,28 @@
   <div *ngIf="show">
   <div class="search-container">
   <ion-toolbar color="light"  class="search-toolbar">
-    <ion-searchbar (ionInput)="searchResult($event)" [(ngModel)]="autocomplete.input" (ionClear)="clearSearch($event)" class="search-places-bar" placeholder="Search a Service"></ion-searchbar>
+      <ion-buttons style="margin-left:-10px" end>
+          <button (click)="drop($event)" tappable ion-button icon-only class="geolocation-button" >
+            <ion-icon color="third" name="ios-options"></ion-icon>
+          </button>
+        </ion-buttons>
+    <ion-searchbar  (ionInput)="searchResult($event)" [(ngModel)]="autocomplete.input" (ionClear)="clearSearch($event)" class="search-places-bar" placeholder="Enter a Service"></ion-searchbar>
     </ion-toolbar>
+
+
     <ion-list [hidden]="this.autocomplete.input.length == 0" *ngIf="result === true" class="search-options-list">
-        <ion-item *ngFor="let item of list" tappable (click)="selectSearchResult(item.id)">
-          {{ item.name }}
+
+        <ion-item *ngIf="showLoading" >
+         <img src="http://easyacesynergy.com/handyman/assets/images/loading.gif" >
         </ion-item>
+
+        <div *ngIf="!showLoading && result">
+            <ion-item *ngFor="let item of list" tappable (click)="selectSearchResult(item.id)">
+                <ion-icon end color="third" name="ios-more"></ion-icon>
+              {{ item.name }}
+            </ion-item>
+          </div>
+
       </ion-list>
 
       <ion-list *ngIf="result === false" class="search-results">
@@ -52,19 +68,17 @@
           </ion-item>
         </ion-list><br><br>
 
-        <ion-row class="grid-categories">
-          <ion-col style="box-shadow:2px 2px 2px black"  col-6 class="category-item" *ngFor="let category of categories">
-            <background-image tappable class="category-heading" src="{{this.globals.baseUrl}}admin/uploads/category/{{category.mobile_path}}">
-              <ion-row class="heading-row">
-                <ion-col style=" padding-top:10% !important; 
-                padding-bottom: 60% !important;"  no-padding width-100>
-                  <h2 class="category-title">{{category.name}}</h2>
-                </ion-col>
-              </ion-row>
-            </background-image>
-          </ion-col>
-        </ion-row>
-    
+
+  <div align="center"  style="padding-left:12vw" >
+    <!--style='margin-bottom: 2%; float:left;height:20vh;width:35vw;margin-right:5vw; background: white;'-->
+<div class="home-category"  *ngFor="let category of categories" style='margin-bottom: 2%; float:left;height:20vh;width:35vw;margin-right:5vw;'>
+  <p style="width:100%; height:50%;" class="home-category" ><img style="height: 100%" (click)="openService(category.id, category.name)" src="{{this.globals.baseUrl}}admin/uploads/category/{{category.path}}"/></p>
+  <h5>{{category.name}}</h5>
+</div>
+
+  <div style="clear:both"></div>
+  </div>
+<div style="clear:both"></div>
   </div>
   </div>
   <div *ngIf="show === false">

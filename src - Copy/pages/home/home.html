@@ -1,0 +1,29 @@
+
+<ion-content class="background">
+        
+    <h3 class="htext" color="second">CATEGORIES</h3>
+    <hr>
+    <div *ngIf="show">
+    <ion-grid>
+    <ion-row style="height:25px">
+    <div style="width:33.333%" *ngFor="let category of categories; let i = index" >
+    <ion-col col-4 >
+    <div class="diss">
+    <img src="{{this.globals.baseUrl}}admin/uploads/category/{{category.path}}" (click)="openService(category.id, category.name)" />
+    </div>
+    <p style="margin-top:13px; color:black" class="para">{{category.name}}</p>
+    
+    </ion-col>
+    </div>
+    </ion-row>
+    </ion-grid>
+    </div>
+    <div *ngIf="show === false">
+            <preload-image  [ratio]="{w:1, h:1}" src="./assets/imgs/nonet.png"></preload-image>
+            <button style="margin-left:45%" (click)="reload()" color="primary" clear ion-button>Try Again</button>
+    </div>
+
+</ion-content>
+
+
+

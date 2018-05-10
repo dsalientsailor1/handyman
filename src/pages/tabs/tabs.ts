@@ -21,7 +21,8 @@ export class TabsPage {
 
   tab1Root = HomPage;
   tab2Root = HomePage;
-  tab4Root = MessagesPage;
+  tab3Root = MessagesPage;
+  tab4Root = DashboardPage;
 
   constructor(private http: Http, public toastCtrl: ToastController) {
 

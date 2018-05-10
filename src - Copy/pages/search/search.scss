@@ -1,0 +1,195 @@
+$list-big-description-font-size: 12px;
+page-search {
+
+  #map {
+    height: 100%;
+}
+
+    ul {
+        padding: 0px;
+        &.rating li {
+        padding: 0px 0px !important;
+        background: none;
+        color: gold;
+        
+    
+        ion-icon {
+          font-size: 30px;
+        }
+
+        
+      }
+     
+    }
+    
+
+    #profile-image {
+      display: flex;
+      // border-radius: 25%;
+      // border: 2px solid black;
+      width: 90px;
+      height: 100px;
+      margin: 0 auto 20px;
+      box-shadow: 0px 11px 20px -3px rgba(142, 136, 146, 0.75);
+    }
+
+    .head{
+      background-color: white;
+    }
+
+    .search-container
+    {
+      left: 0px;
+      right: 0px;
+      z-index: 4;
+
+      .search-toolbar
+      {
+        padding: -5px 35px;
+        margin-left:0px;
+
+        .toolbar-background
+        {
+          // background: color($colors, #ffffff, base);
+          border: none;
+          // @include element-shadow();
+        }
+
+        &.transparent-background
+        {
+          .toolbar-background
+          {
+            background: transparent;
+          }
+
+          ion-searchbar.search-places-bar
+          {
+            .searchbar-input
+            {
+              background-color: grey;
+            }
+          }
+        }
+
+        .bar-buttons
+        {
+          margin: 0px;
+
+          .geolocation-button
+          {
+            // color: $black-d;
+            margin-left: 5px;
+            color: #f78f30d9;
+
+            &.using-geolocation
+            {
+              // color: $theme-color-1;
+            }
+          }
+        }
+
+        ion-searchbar.search-places-bar
+        {
+          background: transparent;
+          padding: 0px 0px;
+          padding-left: 5px;
+          padding-right: 5px;
+          
+          border: none;
+
+          .searchbar-input
+          {
+            border-radius: 10.0rem;
+            background: rgba(71, 61, 139, 0.236);
+            
+            // color: $theme-color-2;
+            // background-color: $white-c;
+          }
+
+          .searchbar-search-icon {
+            
+            ios-searchbar-icon{
+              
+            };
+          }
+        }
+      }
+      ::-webkit-input-placeholder {
+        color: rgb(0, 0, 0) !important;
+      }
+
+      .search-results
+      {
+        padding: 10px;
+        padding-top: 0px;
+      }
+    }
+
+   
+  // geolocato-ends
+        //list
+        .list-big-content
+        {
+          background-color: color($colors, background, base);
+      
+          .list-big
+          {
+            @include layout-list-styles($theme-color-2, $white-d);
+      
+            ion-list {
+              .list-item
+              {
+                
+                .content-row
+                {
+                  
+                  align-items: center;
+                }
+      
+                .item-content
+                {
+                  align-content: stretch;
+                  display: flex;
+                  flex-wrap: wrap;
+                  align-self: stretch;
+      
+                  .item-title
+                  {
+                    margin-bottom: 4px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                  }
+      
+                  // .item-description
+                  // {
+                  //   @include multi-line-ellipsis($list-big-description-font-size);
+                  // }
+                }
+              }
+            }
+          }
+        }
+
+        @-webkit-keyframes listGrow {
+          0% {
+            -webkit-transform: scale3d(1, 0, 1);
+          }
+         
+          100% {
+            -webkit-transform: scale3d(1, 1, 0);
+          }
+        }
+         
+        .list-grow-animation {
+          -webkit-animation: listGrow ease-in 1;
+          animation: listGrow ease-in 1;
+          -webkit-animation-duration: 400ms;
+          animation-duration: 400ms;
+        }
+
+}
+
+.img-full-width{
+  width:100%;
+}

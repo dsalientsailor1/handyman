@@ -1,0 +1,75 @@
+<!--
+  Generated template for the DashboardPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+
+
+<ion-content class="profile-content">
+        <div class="user-details">
+    <ion-row class="user-main-data-row">
+      <ion-col no-padding width-33>
+        <preload-image class="user-image" [ratio]="{w:1, h:1}" src="./assets/imgs/handymantwo.jpg" alt="profile.user.name" title="profile.user.name"></preload-image>
+      </ion-col>
+      <ion-col no-padding>
+        <ion-row class="social-presence-row">
+          <ion-col width-50 class="social-presence-item">
+            <a>
+              <h2 class="social-presence-value">12</h2>
+              <h4 class="social-presence-title">Tasks Completed</h4>
+            </a>
+          </ion-col>
+          <ion-col width-50 class="social-presence-item">
+            <a>
+              <h2 class="social-presence-value">20</h2>
+              <h4 class="social-presence-title">Times Contacted</h4>
+            </a>
+          </ion-col>
+        </ion-row>
+        <ion-row class="profile-action-row">
+          <ion-col no-padding>
+            <button ion-button block small (click)="goToSettings()">
+              Edit profile
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+    <ion-row wrap class="user-bio-row">
+      <ion-col no-padding width-50>
+        <h2 class="user-name">{{this.user.first_name}}</h2>
+      </ion-col>
+      <ion-col no-padding width-50>
+        <span class="user-location">Painting</span>
+      </ion-col>
+      <ion-col no-padding width-100>
+        <p class="user-description">
+          <strong>DESCRIPTION:</strong> a lot of people thjckjnv dkmcfkv kf kmv dkfnvk v  c dkcvn fv dfk vdfvnkvnfjc  fkmnvkdfnvkndf nkdfjvnkdfnckd fjkdvnf
+        </p>
+        <p class="user-description">
+          <strong>NUMBER OF COMPANIES:</strong> 23
+        </p>
+        <p class="user-description">
+          <strong>NUMBER OF COMPANIES VERIFIED:</strong> 1
+        </p>
+        <p class="user-description">
+          <strong>CURRENT LOCATION:</strong> Maitama
+        </p>
+      </ion-col>
+    </ion-row>
+    </div>
+        
+
+</ion-content>
+<ion-footer>
+  <ion-navbar color="third">
+    <ion-buttons end>
+      <button (click)="close()" ion-button>
+        Close
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-footer>
+

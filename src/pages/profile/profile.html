@@ -17,13 +17,13 @@
       <p>{{this.profiles.email}}</p>
       <p>{{this.profiles.city_name}} &bull; {{this.profiles.state_name}}</p>
       <p class="profile-description">{{this.profiles.bio}}</p>
-      <button ion-button *ngIf="!following" small color="purple" >Request</button>
-      <button ion-button *ngIf="following" class="follow-button" small color="purple">Following<ion-icon name="checkmark"></ion-icon></button>
-      <rating  max="5">  </rating>
+      <button ion-button (click)="message()" small color="purple" >Message</button>
+      <button ion-button *ngIf="!bookmarked" (click)="bookmark()" class="follow-button" small color="purple">Bookmark</button>
+      <button ion-button *ngIf="bookmarked" class="follow-button" small color="purple">Bookmarked</button>
     </div>
     </div>
     <div>
-        <ion-segment style="margin-top:60px" [(ngModel)]="pet">
+        <ion-segment [(ngModel)]="pet">
           <ion-segment-button value="details" style="color:#6b6b6b; font-size: 5px">
           <ion-icon style="font-size: 17px">Details</ion-icon>
           </ion-segment-button>
@@ -36,10 +36,40 @@
       <div [ngSwitch]="pet">
       <div  *ngSwitchCase="'details'">
           <div padding style="text-align:start">
-              <h4 >Nationality: {{this.profiles.country_name}}</h4>
-              <p>Phone 1: {{this.profiles.phone1}}</p>
-              <p>Phone 2: {{this.profiles.phone2}}</p>
-              <p >Address: {{this.profiles.address}}</p>
+              <ion-grid>
+                  <ion-row>
+                    <ion-col>
+                       <b> Nationality:</b>
+                    </ion-col>
+                    <ion-col>
+                        {{this.profiles.country_name}}
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                      <ion-col>
+                          <b>Phone 1:</b>
+                      </ion-col>
+                      <ion-col>
+                          {{this.profiles.phone1}}
+                      </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col>
+                            <b>Phone 2:</b>
+                        </ion-col>
+                        <ion-col>
+                            {{this.profiles.phone2}}
+                        </ion-col>
+                      </ion-row>
+                    <ion-row>
+                        <ion-col>
+                            <b>Address:</b>
+                        </ion-col>
+                        <ion-col>
+                            {{this.profiles.address}}
+                        </ion-col>
+                      </ion-row>
+                </ion-grid>
             </div>
       </div>
       <div  *ngSwitchCase="'reviews'">

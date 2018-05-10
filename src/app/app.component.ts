@@ -4,6 +4,7 @@ import { Nav, Platform, MenuController, App, Keyboard } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import * as firebase from 'firebase'; 
+import { Diagnostic } from '@ionic-native/diagnostic';
 
 import { HomePage } from '../pages/home/home';
 import { HomPage } from '../pages/hom/hom';
@@ -16,6 +17,28 @@ import { DashboardPage } from '../pages/dashboard/dashboard';
 import { EditprofilePage } from '../pages/editprofile/editprofile';
 import { LoginPage } from '../pages/login/login';
 
+
+
+// isContactsAuthorized
+// isLocationAuthorized()
+
+
+//    isContactsAuthorized()
+//    {
+//       this._DIAGNOSTIC.isContactsAuthorized()
+//       .then((isAuthorised : any) =>
+//       {
+//          this.isContactsEnabled = true;
+//       })
+//       .catch((error : any) =>
+//       {
+//          console.dir('Contacts is:' + error);
+//       });
+//    }
+
+//    getLocationAuthorizationStatus()
+
+//    requestLocationAuthorization(mode)
 
 
 @Component({
@@ -38,6 +61,7 @@ export class MyApp {
   // appMenuItems: Array<MenuItem>;
   status: any;
   constructor(
+    private diagnostic: Diagnostic,
     public platform: Platform,
     public app: App,
     public menu: MenuController,
@@ -46,6 +70,7 @@ export class MyApp {
     public keyboard: Keyboard
   ) {
     this.initializeApp();
+    this.checkLocationAuthorization();
     this.user = JSON.parse(localStorage.getItem('user'));
     // console.log(this.user.id);
     // this.logout();
@@ -77,7 +102,79 @@ export class MyApp {
   
 
   
-  }
+}
+
+
+
+
+checkLocationAuthorization(){
+alert('sss');
+  this.diagnostic.isLocationAuthorized().then((isAuthorised : any) =>
+      {
+        alert(isAuthorised);
+        console.log(isAuthorised);
+        if(!isAuthorised){
+                  this.diagnostic.requestLocationAuthorization(status).then(function(){
+
+                  }) .catch((error : any) =>
+                              {
+                                console.dir('Contacts is:' + error);
+                              });
+           
+        }
+      })
+      .catch((error : any) =>
+      {
+         console.dir('Contacts is:' + error);
+      });
+ // GRANTED 
+
+
+
+
+
+
+
+
+
+ //             if(status == cordova.plugins.diagnostic.permissionStatus.GRANTED){
+            //                 checkLocationSetting();
+            //             }else{
+            //                 console.warn("Permission denied to use location");
+            //             }
+            //         }, function(error){
+            //             console.error(error);
+                //   });        
+  //authorized
+//   this.diagnostic.isLocationAuthorized(function(authorized){
+//     console.log("Location is " + (authorized ? "authorized" : "unauthorized"));
+// }, function(error){
+//     console.error("The following error occurred: "+error);
+// });
+
+//  this.diagnostic.isLocationAuthorized();
+//  this.diagnostic.requestLocationAuthorization(function(status){
+
+//  });
+   // console.log("Location is " + (authorized ? "authorized" : "unauthorized"));
+//     if(authorized){
+//         checkLocationSetting();
+//     }else{
+//         cordova.plugins.diagnostic.requestLocationAuthorization(function(status){
+//             if(status == cordova.plugins.diagnostic.permissionStatus.GRANTED){
+//                 checkLocationSetting();
+//             }else{
+//                 console.warn("Permission denied to use location");
+//             }
+//         }, function(error){
+//             console.error(error);
+//         });        
+//     }
+// }, function(error){
+//     console.error("The following error occurred: "+error);
+
+ //}
+}
 
   initializeApp() {
     this.platform.ready().then(() => {

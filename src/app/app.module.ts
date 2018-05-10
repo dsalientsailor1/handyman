@@ -18,6 +18,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpModule } from '@angular/http';
 import { HTTP } from '@ionic-native/http';
 import { NotificationsPage } from '../pages/notifications/notifications';
+import { DropdownmenuPage } from '../pages/dropdownmenu/dropdownmenu';
 import { CategoriesProvider } from '../providers/services/categories';
 import { ServiceProvider } from '../providers/services/service';
 import { ProfilesProvider } from '../providers/services/profiles';
@@ -25,6 +26,7 @@ import { ServicePage } from '../pages/service/service';
 import { CategoriesPage } from '../pages/categories/categories';
 import { DashboardPage } from '../pages/dashboard/dashboard';
 import { MessagesPage } from '../pages/messages/messages';
+import { MessagePage } from '../pages/message/message';
 import { HomPage } from '../pages/hom/hom';
 import { SearchPage } from '../pages/search/search';
 import { ProfilePage } from '../pages/profile/profile';
@@ -37,6 +39,7 @@ import { EditdashboardPage } from '../pages/editdashboard/editdashboard';
 import { CompprofilesPage } from '../pages/compprofiles/compprofiles';
 import { MapPage } from '../pages/map/map';
 import { Diagnostic } from '@ionic-native/diagnostic';
+import { GlobalServiceProvider } from '../providers/global-service/global-service';
 // import { ModalsignupPage } from '../pages/modalsignup/modalsignup';
 
 
@@ -45,7 +48,9 @@ import { Diagnostic } from '@ionic-native/diagnostic';
   declarations: [
     MyApp,
     HomePage,
+    MessagePage,
     BackgroundImage,
+    DropdownmenuPage,
     TabsPage,
     SignupmodalPage,
     SignhandymodalPage,
@@ -71,7 +76,17 @@ import { Diagnostic } from '@ionic-native/diagnostic';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp,
+      {
+        platforms : {
+          ios : {
+            // These options are available in ionic-angular@2.0.0-beta.2 and up.
+            scrollAssist: false,    // Valid options appear to be [true, false]
+            autoFocusAssist: false  // Valid options appear to be ['instant', 'delay', false]
+          }
+          // http://ionicframework.com/docs/v2/api/config/Config/)
+        }
+      }),
     Ionic2RatingModule,
     HttpModule
   ],
@@ -79,8 +94,10 @@ import { Diagnostic } from '@ionic-native/diagnostic';
   entryComponents: [
     MyApp,
     HomePage,
+    MessagePage,
     TabsPage,
     CategoriesPage,
+    DropdownmenuPage,
     PreloadImageComponent,
     EditdashboardPage,
     EditprofilePage,
@@ -111,7 +128,8 @@ import { Diagnostic } from '@ionic-native/diagnostic';
     ProfilesProvider,
     Geolocation,
     Diagnostic,
-    HTTP
+    HTTP,
+    GlobalServiceProvider
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

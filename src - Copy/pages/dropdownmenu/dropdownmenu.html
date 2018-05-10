@@ -1,0 +1,28 @@
+
+<ion-list class="no-margin">
+    <ion-list-header class="no-margin">
+      <span ion-text  style="color:darkslateblue; text-align:center" class="bold">Refine Search</span>
+    </ion-list-header>
+    <ion-searchbar (ionInput)="searchResult($event)" [(ngModel)]="autocomplete.input" (ionClear)="clearSearch($event)"  placeholder="Search a Service"></ion-searchbar>
+    <ion-list [hidden]="this.autocomplete.input.length == 0" *ngIf="result === true" class="search-options-list">
+        
+                <ion-item *ngIf="showLoading">
+                    loading image
+                </ion-item>
+        
+                <div *ngIf="!showLoading && result">
+                    <ion-item *ngFor="let item of list" tappable (click)="selectSearchResult(item.id)">
+                        <ion-icon end color="third" name="ios-more"></ion-icon>
+                      {{ item.name }}
+                    </ion-item>
+                  </div>
+        
+              </ion-list>
+              <ion-list *ngIf="result === false" class="search-results">
+                  <ion-item tappable >
+                    No result found
+                  </ion-item>
+                </ion-list><br><br>
+    <span ion-button clear  style="color:darkslateblue; text-align:center" class="bold">Use Your Location</span>
+  
+  </ion-list>

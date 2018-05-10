@@ -1,0 +1,51 @@
+<ion-content padding class="transparent-header">
+  <ion-header no-border>
+    <ion-navbar fullscreen elestic-header>
+    </ion-navbar>
+  </ion-header>
+
+  <div *ngIf="!show" align="center" style="background:none !important">
+    <img src="./assets/imgs/loadgif.gif"/>
+  </div>
+
+  <div *ngIf="show" id="profile-bg" style="background-image:url(./assets/imgs/bgsix.jpg)">
+  <div id="content">
+    <div id="profile-info" padding>
+      <img id="profile-image" *ngIf="this.profiles.pic_set == 1" src={{this.globals.baseUrl}}{{this.profiles.profile_picture}}>
+      <img id="profile-image" *ngIf="this.profiles.pic_set == !1" src="./assets/imgs/fhm.jpg">
+      <h3 id="profile-name">{{this.profiles.first_name}} {{this.profiles.last_name}}</h3>
+      <p>{{this.profiles.email}}</p>
+      <p>{{this.profiles.city_name}} &bull; {{this.profiles.state_name}}</p>
+      <p class="profile-description">{{this.profiles.bio}}</p>
+      <button ion-button *ngIf="!following" small color="purple" >Request</button>
+      <button ion-button *ngIf="following" class="follow-button" small color="purple">Following<ion-icon name="checkmark"></ion-icon></button>
+      <rating  max="5">  </rating>
+    </div>
+    </div>
+    <div>
+        <ion-segment style="margin-top:60px" [(ngModel)]="pet">
+          <ion-segment-button value="details" style="color:#6b6b6b; font-size: 5px">
+          <ion-icon style="font-size: 17px">Details</ion-icon>
+          </ion-segment-button>
+          <ion-segment-button value="reviews" style="color:#6b6b6b">
+          <ion-icon style="font-size: 17px">Reviews</ion-icon>
+          </ion-segment-button>
+          </ion-segment>
+
+      </div>
+      <div [ngSwitch]="pet">
+      <div  *ngSwitchCase="'details'">
+          <div padding style="text-align:start">
+              <h4 >Nationality: {{this.profiles.country_name}}</h4>
+              <p>Phone 1: {{this.profiles.phone1}}</p>
+              <p>Phone 2: {{this.profiles.phone2}}</p>
+              <p >Address: {{this.profiles.address}}</p>
+            </div>
+      </div>
+      <div  *ngSwitchCase="'reviews'">
+         
+        </div>
+        </div>
+      </div>
+
+    </ion-content>

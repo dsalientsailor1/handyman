@@ -99,7 +99,8 @@
                 </ion-thumbnail>
                 <div style="padding-top:-8px" >
                 <h2 style="color: black; font-family:Lucida Sans Regular; font-size: 1.30em; font-weight: lighter">{{individual.first_name}} {{individual.last_name}}</h2>
-                <p style="color:#a9a7a6; font-family:Lucida Sans Regular;">{{individual.state}}&bull;{{individual.city}}</p>
+                <p style="color:#a9a7a6; font-family:Lucida Sans Regular;"><ion-icon name="pin"></ion-icon>
+                {{individual.city}}, {{individual.state_name}}</p>
                 <rating  max="5">  </rating>
                 </div>
                
@@ -111,9 +112,9 @@
           </div>
           </div>
           <div   *ngSwitchCase="'map_view'">
-              <button ion-button (click)="run()" small color="purple" >Request</button>
+        
           </div>
           </div>
-            <div #map id='map'></div>
+         <div #map id='map'></div>       
 </ion-content>
 

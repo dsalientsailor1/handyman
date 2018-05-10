@@ -1,0 +1,69 @@
+ <ion-menu *ngIf="status === 'true'; else display" side="left" id="authenticated" [content]="content">
+  <ion-header>
+    <ion-toolbar  class="user-profile">
+
+      <ion-grid>
+        <ion-row>
+          <ion-col col-4>
+              <div class="user-avatar">
+                <img src="./assets/imgs/avatar.jpg">
+              </div>
+          </ion-col>
+          <ion-col padding-top col-8>
+            <h2 ion-text class="no-margin bold text-white">
+              {{this.user.first_name}}
+            </h2>
+            <span ion-text color="first">Customer</span>
+          </ion-col>
+        </ion-row>
+
+        <ion-row no-padding class="other-data">
+          <ion-col no-padding class="column">
+            <button style="font-family: Lucida sans; border-radius: 25px;" color="first" ion-button icon-left small full (click)="company()" menuClose >
+              <ion-icon color="primary" name="list"></ion-icon>
+              Company
+            </button>
+          </ion-col>
+          <ion-col no-padding class="column">
+            <button style="font-family: Lucida sans; border-radius: 25px;" color="first" ion-button icon-left small full (click)="individual()" menuClose >
+              <ion-icon color="primary" name="list"></ion-icon>
+              Individual
+            </button>
+          </ion-col>
+        </ion-row>
+
+      </ion-grid>
+
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content style="background-color: rgb(255, 255, 255);">
+
+    <ion-list no-lines class="user-list" style="font-family:Lucida sans; margin-left:5px; margin-top:5%">
+      <button ion-item menuClose class="text-1x" *ngFor="let page of pages" (click)="openPage(page)">
+        <ion-icon item-left [name]="page.icon" color="primary"></ion-icon>
+        <span ion-text style="font-size: 6vw; color:black;" >{{page.title}}</span>
+      </button>
+    </ion-list><hr>
+    <ion-list  no-lines class="user-list" style="font-family:Lucida sans; margin-left:5px; margin-top:5%">
+        <button [disabled]="handyman == false" ion-item menuClose class="text-1x" *ngFor="let p of pushPages" (click)="openPage(p)">
+          <ion-icon item-left [name]="p.icon" color="primary"></ion-icon>
+          <span ion-text style="font-size: 6vw; color:black;" >{{p.title}}</span>
+        </button>
+      </ion-list><hr>
+      <ion-list  no-lines class="user-list" style="font-family:Lucida sans; margin-left:5px; margin-top:5%">
+        <button ion-item menuClose class="text-1x" *ngFor="let l of logPage" (click)="logout()">
+          <ion-icon item-left [name]="l.icon" color="primary"></ion-icon>
+          <span ion-text style="font-size: 6vw; color:black;" >{{l.title}}</span>
+        </button>
+      </ion-list>
+  </ion-content>
+
+</ion-menu> 
+<ng-template #display>
+  <ion-menu side="left" id="authenticated" [content]="content">
+      <preload-image [ratio]="{w:1, h:1}" src="./assets/imgs/noologin.png"></preload-image><hr>
+      <h4 (click)="log()" style="font-family: Lucida Sans; text-align:center">Kindly Login</h4>
+  </ion-menu>
+</ng-template>
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
